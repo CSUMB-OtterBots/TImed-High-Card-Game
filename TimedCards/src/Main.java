@@ -11,11 +11,10 @@ public class Main
 
    public static void main(String[] args)
    {
-      TimedCardsViewer myView = TimedCardsViewer();
-      TimedCardsModel myModel = TimedCardsModel();
-      myController = TimedCardController(myView, myModel);
+      TimedCardsViewer myView = new TimedCardsViewer();
+      TimedCardsModel myModel = new TimedCardsModel();
+      TimedCardsController myController = new TimedCardsController(myView, myModel);
       myController.run();
-      
    }
 
 }

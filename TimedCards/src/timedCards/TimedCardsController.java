@@ -6,5 +6,11 @@ public class TimedCardsController
    {
       
    }
+   
+   // The run method is the main entry point into the program.
+   public void run()
+   {
+      
+   }
 
 }
