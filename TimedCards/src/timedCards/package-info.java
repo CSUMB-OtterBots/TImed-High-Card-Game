@@ -1,8 +1,1 @@
-/**
- * 
- */
-/**
- * @author cayuse
- *
- */
 package timedCards;
