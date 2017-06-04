@@ -15,14 +15,6 @@ public class TimedCardsViewer implements ActionListener
       
    }
 
-   /* required for ActionListner, this method is called
-    * when registered actions (buttons etc) are interacted with.
-    */
-   public void actionPerformed(ActionEvent e)
-   {
-   }
-}
-
    
 // this class embodies the JPanels and Layout(s) needed, this is where all the cards and controls will be placed
 class CardTable extends JFrame
@@ -69,5 +61,13 @@ class CardTable extends JFrame
       // panel.setMinimumHeight( 200);
       panel.setEnabled(true);
       panel.setVisible(true);
+   }
+}
+
+   /* required for ActionListner, this method is called
+    * when registered actions (buttons etc) are interacted with.
+    */
+   public void actionPerformed(ActionEvent e)
+   {
    }
 }
