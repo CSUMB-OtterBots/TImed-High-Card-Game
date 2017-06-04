@@ -2,6 +2,15 @@ package timedCards;
 
 import java.util.Random;
 
+import java.awt.*;
+import java.util.Random;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.event.*;
+
 public class TimedCardsModel
 {
    public TimedCardsModel()
