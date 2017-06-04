@@ -20,40 +20,6 @@ public class phase3 implements ActionListener
 
    public static void main(String[] args)
    {
-      // establish main frame in which program will run
-      int numPacksPerDeck = 1;
-      int numJokersPerPack = 0;
-      int numUnusedCardsPerPack = 0;
-      Card[] unusedCardsPerPack = null;
-
-      // set up "table"
-      myCardTable.setSize(800, 600);
-      myCardTable.setLocationRelativeTo(null);
-      myCardTable.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-      // instantiate game
-      CardGameFramework highCardGame = 
-            new CardGameFramework(numPacksPerDeck, numJokersPerPack, numUnusedCardsPerPack,
-                                  unusedCardsPerPack, NUM_PLAYERS, NUM_CARDS_PER_HAND);
-      // shuffle and deal into the hands.
-      highCardGame.deal();
-      
-      // register buttons to play 
-      //compWon
-      
-      // set the globals to the human and game hands
-      compHand = highCardGame.getHand(0);
-      humanHand = highCardGame.getHand(1);
-      
-      compHand.sort();
-      humanHand.sort();
-
-      // Deal Cards to "Hands" and do initial display
-      prepHandForDisplay();
-      displayHands();
-      
-      // show everything to the user
-      myCardTable.setVisible(true);
    }
 
    // method that displays hands to user
