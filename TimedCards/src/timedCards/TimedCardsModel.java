@@ -4,7 +4,10 @@ import java.util.Random;
 
 public class TimedCardsModel
 {
-
+   public TimedCardsModel()
+   {
+      
+   }
 }
 
 

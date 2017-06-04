@@ -10,6 +10,10 @@ import java.awt.event.*;
 
 public class TimedCardsViewer implements ActionListener
 {
+   public TimedCardsViewer()
+   {
+      
+   }
 
    /* required for ActionListner, this method is called
     * when registered actions (buttons etc) are interacted with.
