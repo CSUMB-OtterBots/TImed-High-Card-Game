@@ -59,7 +59,13 @@ public class TimedCardsViewer
     */
    void updateCompHand(Hand hand)
    {
-      
+      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      {
+         if (computerLabels[i] != null)
+         {
+            myCardTable.pnlComputerHand.add(computerLabels[i]);
+         }
+      }
    }
    
    /*
@@ -71,7 +77,14 @@ public class TimedCardsViewer
     */
    void updateHumanHand(Hand hand)
    {
-      
+      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      {
+         if (humanButtons[i] != null)
+         {
+            myCardTable.pnlHumanHand.add(humanButtons[i]);
+            //humanButtons[i].addActionListener(new phase3());
+         }
+      }
    }
    
    // method resets the screen
