@@ -13,6 +13,18 @@ import java.awt.event.*;
 
 public class TimedCardsModel
 {
+   static Hand compHand; // computer's hand
+   static Hand humanHand; // human's hand
+   
+   static Card lastComputerCard = null; // clears computer hand
+   static Card lastHumanCard = null; // clears human hand
+   
+   static int humanScore = 0;
+   static int compScore = 0;
+   
+   static Hand winnings = new Hand();
+   
+   // default constructor
    public TimedCardsModel()
    {
       
@@ -252,6 +264,13 @@ class Hand
          retCard = myCards[index];
          myCards[index] = null;
          numCards--;
+         // shift cards down
+         for (int i = index; i < numCards; i++)
+         {
+            myCards[i] = myCards[i+1];
+         }
+         // null the last card
+         myCards[numCards] = null;
       }
 
       else
@@ -713,3 +732,5 @@ class CardGameFramework
    }
 
 }
+
+

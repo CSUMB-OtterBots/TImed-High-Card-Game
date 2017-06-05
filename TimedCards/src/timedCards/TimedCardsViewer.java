@@ -10,8 +10,44 @@ import java.awt.event.*;
 
 public class TimedCardsViewer implements ActionListener
 {
+   static int NUM_CARDS_PER_HAND = TimedCardsController.NUM_CARDS_PER_HAND;
+   static int NUM_PLAYERS = TimedCardsController.NUM_PLAYERS;
+   
+   static JLabel[] computerLabels = new JLabel[NUM_CARDS_PER_HAND];
+   static JLabel[] humanLabels = new JLabel[NUM_CARDS_PER_HAND];
+   static JLabel[] playedCardLabels = new JLabel[NUM_PLAYERS];
+   static JLabel[] playLabelText = new JLabel[NUM_PLAYERS];
+
+   static JButton[] humanButtons = new JButton[NUM_CARDS_PER_HAND];
+   static CardTable myCardTable = 
+         new CardTable("CardTable", NUM_CARDS_PER_HAND, NUM_PLAYERS);
+   static GUICard myGUICard = new GUICard();
+   
+   // Default constructor
    public TimedCardsViewer()
    {
+      
+      // set up "table"
+      myCardTable.setSize(800, 600);
+      myCardTable.setLocationRelativeTo(null);
+      myCardTable.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // show everything to the user
+      myCardTable.setVisible(true);
+   }
+   
+   JButton[] buttonsFromHand(Hand hand)
+   {
+      JButton[] buttons = new JButton[hand.getNumCards()];
+      
+      return buttons;
+   }
+   
+   JLabel[] labelsFromHand(Hand hand)
+   {
+      JLabel[] labels = new JLabel[hand.getNumCards()];
+      
+      return labels;
       
    }
 
@@ -21,12 +57,33 @@ public class TimedCardsViewer implements ActionListener
    public void actionPerformed(ActionEvent e)
    {
    }
+   
+   void upDatePlayArea(Card[] cards)
+   {
+      
+   }
+   
+   void updateCompHand(Hand hand)
+   {
+      
+   }
+   
+   void updateHumanHand(Hand hand)
+   {
+      
+   }
+   
+   // method resets the screen
+   void refreshScreen()
+   {
+      myCardTable.setVisible(false);
+      myCardTable.setVisible(true);
+   }
 }
 
 // this class embodies the JPanels and Layout(s) needed, this is where all the cards and controls will be placed
 class CardTable extends JFrame
 {
-   public static final long serialVersionUID = 12;
    static int MAX_CARDS_PER_HAND = 56;
    static int MAX_PLAYERS = 2; // for now, we only allow 2 person games
 
