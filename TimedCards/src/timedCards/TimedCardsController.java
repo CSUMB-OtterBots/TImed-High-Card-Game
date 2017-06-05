@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.event.*;
 
-public class TimedCardsController
+public class TimedCardsController implements ActionListener
 {
    static int NUM_CARDS_PER_HAND = 7; // number of cards in hand to be played
    static int NUM_PLAYERS = 2; // max number of players
@@ -37,19 +37,21 @@ public class TimedCardsController
       
       // register buttons to play 
       //compWon
-      
-      // set the globals to the human and game hands
-      compHand = highCardGame.getHand(0);
-      humanHand = highCardGame.getHand(1);
-      
-      compHand.sort();
-      humanHand.sort();
 
       // Deal Cards to "Hands" and do initial display
-      prepHandForDisplay();
-      displayHands();
+      //prepHandForDisplay();
+      //displayHands();
      
       
    }
-
+   
+   /* required for ActionListner, this method is called
+    * when registered actions (buttons etc) are interacted with.
+    * This method is obviously officially public because of how
+    * it has to be declared, but should only be used by objects
+    * created from within the class.
+    */
+   public void actionPerformed(ActionEvent e)
+   {
+   }
 }

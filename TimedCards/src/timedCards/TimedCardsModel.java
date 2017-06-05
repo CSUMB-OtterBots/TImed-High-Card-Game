@@ -82,7 +82,7 @@ public class TimedCardsModel
     */
    Card getLastCompCard()
    {
-      
+      return new Card(); // just to allow compile
    }
    
    /*
@@ -90,7 +90,7 @@ public class TimedCardsModel
     */
    Card getLastHumanCard()
    {
-      
+      return new Card(); // just to allow compile
    }
    
    /*
@@ -107,5 +107,27 @@ public class TimedCardsModel
    Hand getHumanHand()
    {
       return humanHand;
+   }
+   
+   /*
+    * This method takes a card as argument
+    *   and returns the index to its location.
+    *   it should probably use inspectCard() as == should
+    *   work here.
+    */
+   int getIdxFromHumanHand(Card card)
+   {
+      return -1; // just to allow compile
+   }
+   
+   /*
+    * This method takes a card as an argument
+    *   and returns the index to its location.
+    *   it should probably use inspectCard() as == should
+    *   work here.
+    */
+   int getIdxFromCompHand(Card card)
+   {
+      return -1; // just to allow compile
    }
 }

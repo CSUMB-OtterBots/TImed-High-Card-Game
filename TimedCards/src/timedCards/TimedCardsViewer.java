@@ -8,7 +8,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
 import java.awt.event.*;
 
-public class TimedCardsViewer implements ActionListener
+public class TimedCardsViewer
 {
    static int NUM_CARDS_PER_HAND = TimedCardsController.NUM_CARDS_PER_HAND;
    static int NUM_PLAYERS = TimedCardsController.NUM_PLAYERS;
@@ -128,16 +128,6 @@ public class TimedCardsViewer implements ActionListener
       JLabel[] labels = new JLabel[hand.getNumCards()];
       
       return labels;
-   }
-   
-   /* required for ActionListner, this method is called
-    * when registered actions (buttons etc) are interacted with.
-    * This method is obviously officially public because of how
-    * it has to be declared, but should only be used by objects
-    * created from within the class.
-    */
-   public void actionPerformed(ActionEvent e)
-   {
    }
 }
 
