@@ -1,12 +1,6 @@
 package timedCards;
 
-import java.awt.*;
-import java.util.Random;
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
+import java.util.Random; // not sure if we need yet
 import java.awt.event.*;
 
 public class TimedCardsController implements ActionListener
@@ -14,14 +8,13 @@ public class TimedCardsController implements ActionListener
    static int NUM_CARDS_PER_HAND = 7; // number of cards in hand to be played
    static int NUM_PLAYERS = 2; // max number of players
    
-   static TimedCardsViewer myViewer;
-   static TimedCardsModel  myModel;
+   TimedCardsViewer myViewer;
+   TimedCardsModel  myModel;
 
-   public TimedCardsController(TimedCardsViewer myViewer, TimedCardsModel myModel)
+   public TimedCardsController(TimedCardsViewer view, TimedCardsModel model)
    {
-      this.myViewer = myViewer; // set argument to global variable
-      this.myModel  = myModel;  // set argument to global variable
-      
+      this.myViewer = view; // set argument to global variable
+      this.myModel  = model;  // set argument to global variable  
    }
    
    // The run method is the main entry point into the program.
