@@ -36,6 +36,15 @@ public class TimedCardsViewer implements ActionListener
       myCardTable.setVisible(true);
    }
    
+   /*
+    * This method returns an array of JButtons. The returned array must be
+    *    full of valid buttons as the calling function will have to use 
+    *    array.length to get the size.
+    * To this end, we allocate an array sized to the number of cards in the
+    *    hand and should fill the created array with only valid entries.
+    * The returned buttons should be set to respond to this class upon
+    *    activation.
+    */
    JButton[] buttonsFromHand(Hand hand)
    {
       JButton[] buttons = new JButton[hand.getNumCards()];
@@ -43,6 +52,13 @@ public class TimedCardsViewer implements ActionListener
       return buttons;
    }
    
+   /*
+    * This method returns an array of JLabels. The returned array must be
+    *    full of valid labels as the calling function will have to use 
+    *    array.length to get the size.
+    * To this end, we allocate an array sized to the number of cards in the
+    *    hand and should fill the created array with only valid entries.
+    */
    JLabel[] labelsFromHand(Hand hand)
    {
       JLabel[] labels = new JLabel[hand.getNumCards()];
