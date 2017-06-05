@@ -13,9 +13,14 @@ public class TimedCardsController implements ActionListener
 {
    static int NUM_CARDS_PER_HAND = 7; // number of cards in hand to be played
    static int NUM_PLAYERS = 2; // max number of players
+   
+   static TimedCardsViewer myViewer;
+   static TimedCardsModel  myModel;
 
    public TimedCardsController(TimedCardsViewer myViewer, TimedCardsModel myModel)
    {
+      this.myViewer = myViewer; // set argument to global variable
+      this.myModel  = myModel;  // set argument to global variable
       
    }
    
@@ -35,14 +40,17 @@ public class TimedCardsController implements ActionListener
       // shuffle and deal into the hands.
       highCardGame.deal();
       
-      // register buttons to play 
-      //compWon
-
-      // Deal Cards to "Hands" and do initial display
-      //prepHandForDisplay();
-      //displayHands();
+      // perform initial update
+      updateHands();
      
       
+   }
+   
+   private void updateHands()
+   {
+      myViewer.updateCompHand(myModel.getCompHand()); // update comp hand
+      myViewer.updateHumanHand(myModel.getHumanHand()); // update human hand
+      myViewer.refreshScreen();  // refresh the screen
    }
    
    /* required for ActionListner, this method is called
