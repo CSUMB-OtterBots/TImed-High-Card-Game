@@ -159,6 +159,7 @@ public class TimedCardsController implements ActionListener
          updateHands();
          updatePlayArea();
          computerMove();
+         myViewer.refreshScreen();
       }
       else
       {

@@ -15,7 +15,6 @@ public class UpTimer extends Thread
    
    public void run()
    {
-      System.out.println("thread is running...");  
       timer = new Timer(1000, new ActionListener()
       {
          @Override

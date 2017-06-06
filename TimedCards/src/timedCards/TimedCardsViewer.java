@@ -108,8 +108,6 @@ public class TimedCardsViewer implements ItemListener
       
       for (int i = 0; i < computerLabels.length; i++)
       {
-         System.out.println(i);
-         System.out.println(computerLabels.length);
          myCardTable.pnlComputerHand.add(computerLabels[i]);
       }
    }
