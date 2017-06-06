@@ -10,11 +10,18 @@ public class TimedCardsController implements ActionListener
    
    TimedCardsViewer myViewer;
    TimedCardsModel  myModel;
+   UpTimer myTimer;
 
-   public TimedCardsController(TimedCardsViewer view, TimedCardsModel model)
+   public TimedCardsController(TimedCardsViewer view,
+             TimedCardsModel model)
    {
-      this.myViewer = view; // set argument to global variable
-      this.myModel  = model;  // set argument to global variable  
+      this.myViewer = view;  // set argument to global variable
+      this.myModel  = model; // set argument to global variable
+   }
+   
+   public void setTimer(UpTimer timer)
+   {
+      this.myTimer  = timer; // set argument to global variable
    }
    
    // The run method is the main entry point into the program.
@@ -62,6 +69,18 @@ public class TimedCardsController implements ActionListener
     */
    public void actionPerformed(ActionEvent e)
    {
-      System.out.println("Test");
+      
+      if (e.getActionCommand() == "Start")
+      {
+         myTimer.startTimer();
+      }
+      else if (e.getActionCommand() == "Stop")
+      {
+         myTimer.stopTimer();
+      }
+      else
+      {
+         System.out.println(e.getSource());
+      }
    }
 }

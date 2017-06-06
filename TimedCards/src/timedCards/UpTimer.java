@@ -15,9 +15,9 @@ public class UpTimer extends Thread
    
    public void run()
    {
+      System.out.println("thread is running...");  
       timer = new Timer(1000, new ActionListener()
       {
-
          @Override
          public void actionPerformed(ActionEvent e)
          {
@@ -25,7 +25,17 @@ public class UpTimer extends Thread
             doNothing(10);
          }
 
-      });
+      });  
+   }
+   
+   void startTimer()
+   {
+      timer.start();
+   }
+   
+   void stopTimer()
+   {
+      timer.stop();
    }
 
    public void doNothing(int milliseconds)

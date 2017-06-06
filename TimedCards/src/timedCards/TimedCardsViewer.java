@@ -58,8 +58,6 @@ public class TimedCardsViewer
    
    void updateTimer()
    {
-      System.out.println("test here");
-      System.exit(0);
       counter++;
       timer.setText(String.format("%02d:%02d", counter / 60, counter % 60));
       myCardTable.pnlTimer.setVisible(false);
