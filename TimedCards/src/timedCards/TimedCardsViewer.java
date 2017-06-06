@@ -8,17 +8,16 @@ import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
 import java.awt.event.*;
 
-public class TimedCardsViewer
+public class TimedCardsViewer implements ItemListener
 {
    static int NUM_CARDS_PER_HAND = TimedCardsController.NUM_CARDS_PER_HAND;
    static int NUM_PLAYERS = TimedCardsController.NUM_PLAYERS;
    
    static JLabel[] computerLabels = new JLabel[NUM_CARDS_PER_HAND];
-   static JLabel[] humanLabels = new JLabel[NUM_CARDS_PER_HAND];
    static JLabel[] playedCardLabels = new JLabel[NUM_PLAYERS];
    static JLabel[] playLabelText = new JLabel[NUM_PLAYERS];
 
-   static JButton[] humanButtons = new JButton[NUM_CARDS_PER_HAND];
+   static JToggleButton[] humanButtons = new JToggleButton[NUM_CARDS_PER_HAND];
    static CardTable myCardTable = 
          new CardTable("CardTable", NUM_CARDS_PER_HAND, NUM_PLAYERS);
    static GUICard myGUICard = new GUICard();
@@ -85,35 +84,15 @@ public class TimedCardsViewer
     */
    void updateCompHand(Hand hand)
    {
-      Card nextCard;
-
-      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
-      {
-         if (computerLabels[i] != null)
-         {
-            myCardTable.pnlComputerHand.remove(computerLabels[i]);
-            computerLabels[i] = null;
-         }
-      }
-
-      // add new labels for comp hand
-      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
-      {
-         nextCard = hand.inspectCard(i);
-         if (!nextCard.getErrorFlag())
-         {
-            computerLabels[i] = new JLabel(GUICard.getBackCardIcon());
-         }
-      }
+      myCardTable.pnlComputerHand.removeAll(); // clear old labels
+      computerLabels = null;
+      computerLabels = labelsFromHand(hand);
       
-      System.out.println("Here is the comp hand = " + hand.toString());
-      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      for (int i = 0; i < computerLabels.length; i++)
       {
-         if (computerLabels[i] != null)
-         {
-            System.out.println(i + ". here");
-            myCardTable.pnlComputerHand.add(computerLabels[i]);
-         }
+         System.out.println(i);
+         System.out.println(computerLabels.length);
+         myCardTable.pnlComputerHand.add(computerLabels[i]);
       }
    }
    
@@ -126,38 +105,15 @@ public class TimedCardsViewer
     */
    void updateHumanHand(Hand hand, ActionListener listner)
    {
-      Card nextCard;
-
-      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      myCardTable.pnlHumanHand.removeAll(); //  clear old buttons
+      humanButtons = null;
+      humanButtons = buttonsFromHand(hand);      
+      for (int i = 0; i < humanButtons.length; i++)
       {
-         if (humanButtons[i] != null)
-         {
-            myCardTable.pnlHumanHand.remove(humanButtons[i]);
-            humanButtons[i] = null;
-         }
+         myCardTable.pnlHumanHand.add(humanButtons[i]);
+         humanButtons[i].addItemListener(this);
       }
       
-      // add new labels for human hand
-      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
-      {
-         JButton button;
-         nextCard = hand.inspectCard(i);
-         if (! nextCard.getErrorFlag() )
-         {         
-            button = new JButton("", GUICard.getIcon(nextCard));
-            humanButtons[i] = button;
-         }
-      }
-      
-      System.out.println("Here is the human hand = " + hand.toString());
-      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
-      {
-         if (humanButtons[i] != null)
-         {
-            myCardTable.pnlHumanHand.add(humanButtons[i]);
-            humanButtons[i].addActionListener(listner);
-         }
-      }
    }
    
    // method resets the screen
@@ -165,6 +121,26 @@ public class TimedCardsViewer
    {
       myCardTable.setVisible(false);
       myCardTable.setVisible(true);
+   }
+   
+
+   public void itemStateChanged(ItemEvent e)
+   {
+      JToggleButton pressedButton = (JToggleButton) e.getSource();
+      //first we must ignore events from buttons unchecking
+      if (e.getStateChange() == 2)
+      {
+         return;
+      }
+      
+      // then clear out any 'old' checked buttons
+      for (int i = 0; i < humanButtons.length; i++)
+      {
+         if (humanButtons[i] != pressedButton)
+         {
+            humanButtons[i].setSelected(false);
+         }
+      }
    }
    
    /************************* Private Methods *****************************/
@@ -177,10 +153,16 @@ public class TimedCardsViewer
     * The returned buttons should be set to respond to this class upon
     *    activation.
     */
-   private JButton[] buttonsFromHand(Hand hand)
+   private JToggleButton[] buttonsFromHand(Hand hand)
    {
-      JButton[] buttons = new JButton[hand.getNumCards()];
-      
+      JToggleButton[] buttons = new JToggleButton[hand.getNumCards()];
+
+      for (int i = 0; i < hand.getNumCards(); i++)
+      {
+         Card nextCard = hand.inspectCard(i);
+         JToggleButton button = new JToggleButton(GUICard.getIcon(nextCard));
+         buttons[i] = button;
+      }
       return buttons;
    }
    
@@ -194,9 +176,12 @@ public class TimedCardsViewer
    private JLabel[] labelsFromHand(Hand hand)
    {
       JLabel[] labels = new JLabel[hand.getNumCards()];
-      
+
+      for (int i = 0; i < hand.getNumCards(); i++)
+      {
+         labels[i] = new JLabel(GUICard.getBackCardIcon());
+      }
       return labels;
-      
    }
    
    /*
