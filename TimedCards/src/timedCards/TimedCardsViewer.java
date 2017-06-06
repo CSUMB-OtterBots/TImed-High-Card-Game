@@ -70,8 +70,18 @@ public class TimedCardsViewer implements ItemListener
     *   the images. It may be asked to put JLabels or JButtons on the
     *   screen depending on the needs of the game.
     */
-   void upDatePlayArea(Card[] cards, int numCards)
+   void upDatePlayArea(Card left, Card right, ActionListener listener)
    {
+      // clear old table
+      myCardTable.pnlPlayArea.removeAll();
+      // set up new stuff
+      JButton leftButton = new JButton(GUICard.getIcon(left));
+      JButton rightButton = new JButton(GUICard.getIcon(right));
+      leftButton.addActionListener(listener);
+      rightButton.addActionListener(listener);
+      // put on table
+      myCardTable.pnlPlayArea.add(leftButton);
+      myCardTable.pnlPlayArea.add(rightButton);
       
    }
    
