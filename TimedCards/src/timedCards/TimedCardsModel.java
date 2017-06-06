@@ -29,6 +29,9 @@ public class TimedCardsModel
    
    public static CardGameFramework myCardGame;
    
+   static private Hand pileA = new Hand();
+   static private Hand pileB = new Hand();
+   
    // default constructor
    public TimedCardsModel()
    {

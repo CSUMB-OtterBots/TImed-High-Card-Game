@@ -86,7 +86,7 @@ public class TimedCardsViewer implements ItemListener
    {
       myCardTable.pnlComputerHand.removeAll(); // clear old labels
       computerLabels = null;
-      computerLabels = labelsFromHand(hand);
+      computerLabels = backLabelsFromHand(hand);
       
       for (int i = 0; i < computerLabels.length; i++)
       {
@@ -172,15 +172,12 @@ public class TimedCardsViewer implements ItemListener
     *    array.length to get the size.
     * To this end, we allocate an array sized to the number of cards in the
     *    hand and should fill the created array with only valid entries.
+    * This method is theoretical future expansion and won't be used here
     */
    private JLabel[] labelsFromHand(Hand hand)
    {
       JLabel[] labels = new JLabel[hand.getNumCards()];
 
-      for (int i = 0; i < hand.getNumCards(); i++)
-      {
-         labels[i] = new JLabel(GUICard.getBackCardIcon());
-      }
       return labels;
    }
    
@@ -197,7 +194,11 @@ public class TimedCardsViewer implements ItemListener
    private JLabel[] backLabelsFromHand(Hand hand)
    {
       JLabel[] labels = new JLabel[hand.getNumCards()];
-      
+
+      for (int i = 0; i < hand.getNumCards(); i++)
+      {
+         labels[i] = new JLabel(GUICard.getBackCardIcon());
+      }
       return labels;
    }
 }
