@@ -10,19 +10,18 @@ import javax.swing.border.TitledBorder;
 //this class embodies the JPanels and Layout(s) needed, this is where all the cards and controls will be placed
 class CardTable extends JFrame
 {
+   private static final long serialVersionUID = 1L;
    static int MAX_CARDS_PER_HAND = 56;
    static int MAX_PLAYERS = 2; // for now, we only allow 2 person games
 
    private int numCardsPerHand;
-   private int numPlayers;
 
    public JPanel pnlComputerHand, pnlHumanHand, 
-                 pnlPlayArea, pnlTimer;
+                 pnlPlayArea, pnlTimer, pnlControl;
 
    // creates the play area for the game
    CardTable(String title, int numCardsPerHand, int numPlayers)
    {
-      this.numPlayers = numPlayers;
       this.numCardsPerHand = numCardsPerHand;
 
       BorderLayout layout = new BorderLayout();
@@ -32,7 +31,7 @@ class CardTable extends JFrame
       setPanelVars(pnlComputerHand, "Computer Hand");
       add(pnlComputerHand, BorderLayout.NORTH);
 
-      pnlPlayArea = new JPanel(new GridLayout(3, 3));
+      pnlPlayArea = new JPanel();
       setPanelVars(pnlPlayArea, "Play Area");
       add(pnlPlayArea, BorderLayout.CENTER);
 
@@ -43,6 +42,10 @@ class CardTable extends JFrame
       pnlTimer = new JPanel(new GridLayout(3, 1));
       setPanelVars(pnlTimer, "Timer");
       add(pnlTimer, BorderLayout.EAST);
+      
+      pnlControl = new JPanel(new GridLayout(3,1));
+      setPanelVars(pnlControl, "Control");
+      add(pnlControl, BorderLayout.WEST);
    }
 
    // sets up the panel so that the text is within the border

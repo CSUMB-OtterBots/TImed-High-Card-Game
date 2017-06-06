@@ -66,7 +66,7 @@ public class TimedCardsModel
       return false;
    }
    
-   Card topCardInPile(int index)
+   Card getTopCardInPile(int index)
    {
       if (index ==0 || index == 1 )
       {

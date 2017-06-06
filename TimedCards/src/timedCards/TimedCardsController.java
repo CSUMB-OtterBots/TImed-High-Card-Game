@@ -66,6 +66,10 @@ public class TimedCardsController implements ActionListener
    
    void updatePlayArea()
    {
+      Card left = myModel.getTopCardInPile(0);
+      Card right = myModel.getTopCardInPile(1);
+      
+      myViewer.upDatePlayArea(left, right, this);
       
    }
    
