@@ -19,18 +19,13 @@ public class TimedCardsModel
    static private Hand compHand; // computer's hand
    static private Hand humanHand; // human's hand
    
-   static private Card lastComputerCard = null; // clears computer hand
-   static private Card lastHumanCard = null; // clears human hand
-   
-   static private int humanScore = 0;
-   static private int compScore = 0;
-   
-   static private Hand winnings = new Hand();
-   
    public static CardGameFramework myCardGame;
    
    static private Hand pileA = new Hand();
    static private Hand pileB = new Hand();
+   
+   static private int humanScore = 0;
+   static private int compScore = 0;
    
    // default constructor
    public TimedCardsModel()
@@ -54,6 +49,28 @@ public class TimedCardsModel
       compHand.sort();
       humanHand.sort();
       
+   }
+   
+   void addCardToPileA(Card card)
+   {
+      pileA.takeCard(card);
+   }
+   
+   void addCardToPilB(Card card)
+   {
+      pileB.takeCard(card);
+   }
+   
+   Card topCardInPileA()
+   {
+      int index = pileA.getNumCards();
+      return pileA.inspectCard(index);
+   }
+   
+   Card topCardinPileB()
+   {
+      int index = pileB.getNumCards();
+      return pileB.inspectCard(index);
    }
    
    /*
