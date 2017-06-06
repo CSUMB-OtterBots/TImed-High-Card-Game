@@ -59,10 +59,33 @@ public class TimedCardsViewer
     */
    void updateCompHand(Hand hand)
    {
+      Card nextCard;
+
       for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
       {
          if (computerLabels[i] != null)
          {
+            myCardTable.pnlComputerHand.remove(computerLabels[i]);
+            computerLabels[i] = null;
+         }
+      }
+
+      // add new labels for comp hand
+      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      {
+         nextCard = hand.inspectCard(i);
+         if (!nextCard.getErrorFlag())
+         {
+            computerLabels[i] = new JLabel(GUICard.getBackCardIcon());
+         }
+      }
+      
+      System.out.println("Here is the comp hand = " + hand.toString());
+      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      {
+         if (computerLabels[i] != null)
+         {
+            System.out.println(i + ". here");
             myCardTable.pnlComputerHand.add(computerLabels[i]);
          }
       }
@@ -77,6 +100,30 @@ public class TimedCardsViewer
     */
    void updateHumanHand(Hand hand)
    {
+      Card nextCard;
+
+      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      {
+         if (humanButtons[i] != null)
+         {
+            myCardTable.pnlHumanHand.remove(humanButtons[i]);
+            humanButtons[i] = null;
+         }
+      }
+      
+      // add new labels for human hand
+      for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
+      {
+         JButton button;
+         nextCard = hand.inspectCard(i);
+         if (! nextCard.getErrorFlag() )
+         {         
+            button = new JButton("", GUICard.getIcon(nextCard));
+            humanButtons[i] = button;
+         }
+      }
+      
+      System.out.println("Here is the human hand = " + hand.toString());
       for (int i = 0; i < NUM_CARDS_PER_HAND; i++)
       {
          if (humanButtons[i] != null)
