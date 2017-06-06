@@ -17,7 +17,7 @@ public class TimedCardsViewer implements ItemListener
    static JLabel[] playedCardLabels = new JLabel[NUM_PLAYERS];
    static JLabel[] playLabelText = new JLabel[NUM_PLAYERS];
 
-   static JToggleButton[] humanButtons = new JToggleButton[NUM_CARDS_PER_HAND];
+   JToggleButton[] humanButtons = new JToggleButton[NUM_CARDS_PER_HAND];
    static CardTable myCardTable = 
          new CardTable("CardTable", NUM_CARDS_PER_HAND, NUM_PLAYERS);
    static GUICard myGUICard = new GUICard();
@@ -27,8 +27,10 @@ public class TimedCardsViewer implements ItemListener
    
    JButton start = new JButton("Start");
    JButton stop = new JButton("Stop");
-   
    JButton noPlay = new JButton("No Play");
+   
+   JButton leftButton = null;
+   JButton rightButton = null;
    
    // Default constructor
    public TimedCardsViewer()
@@ -79,8 +81,10 @@ public class TimedCardsViewer implements ItemListener
       // clear old table
       myCardTable.pnlPlayArea.removeAll();
       // set up new stuff
-      JButton leftButton = new JButton(GUICard.getIcon(left));
-      JButton rightButton = new JButton(GUICard.getIcon(right));
+      leftButton = null;
+      rightButton = null;
+      leftButton = new JButton(GUICard.getIcon(left));
+      rightButton = new JButton(GUICard.getIcon(right));
       leftButton.addActionListener(listener);
       rightButton.addActionListener(listener);
       // put on table

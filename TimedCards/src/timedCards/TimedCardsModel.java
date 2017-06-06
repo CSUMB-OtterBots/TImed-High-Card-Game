@@ -21,7 +21,7 @@ public class TimedCardsModel
    
    public static CardGameFramework myCardGame;
    
-   static private Hand[] piles = new Hand[2];
+   Hand[] piles = new Hand[2];
    
    static private int humanScore = 0;
    static private int compScore = 0;
@@ -107,27 +107,5 @@ public class TimedCardsModel
    Hand getHumanHand()
    {
       return humanHand;
-   }
-   
-   /*
-    * This method takes a card as argument
-    *   and returns the index to its location.
-    *   it should probably use inspectCard() as == should
-    *   work here.
-    */
-   int getIdxFromHumanHand(Card card)
-   {
-      return -1; // just to allow compile
-   }
-   
-   /*
-    * This method takes a card as an argument
-    *   and returns the index to its location.
-    *   it should probably use inspectCard() as == should
-    *   work here.
-    */
-   int getIdxFromCompHand(Card card)
-   {
-      return -1; // just to allow compile
    }
 }

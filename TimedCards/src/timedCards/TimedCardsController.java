@@ -11,6 +11,8 @@ public class TimedCardsController implements ActionListener
    TimedCardsViewer myViewer;
    TimedCardsModel  myModel;
    UpTimer myTimer;
+   
+   boolean deckEmpty = false;
 
    public TimedCardsController(TimedCardsViewer view,
              TimedCardsModel model)
@@ -71,6 +73,56 @@ public class TimedCardsController implements ActionListener
       
    }
    
+   void computerMove()
+   {
+      
+   }
+   
+   void processGameEnd()
+   {
+      
+   }
+   
+   boolean gameEnd()
+   {
+      return deckEmpty;
+   }
+   
+   void processNoPlay()
+   {
+      
+   }
+   
+   boolean processUserPlay(int pile)
+   {
+      int index = 0;
+      Card playCard;
+      
+      // get the top card from pile
+      Card pileCard = myModel.getTopCardInPile(pile);
+      
+      // identify the index of the card we intend to play
+      for (int i = 0; i < myViewer.humanButtons.length; i++)
+      {
+         if (myViewer.humanButtons[i].isSelected())
+         {
+            index = i;
+            break;
+         }
+      }
+      // now find the card that was played
+      playCard = myModel.getHumanHand().inspectCard(index);
+      // check if it was ok
+      if ( Math.abs(playCard.getValue() - pileCard.getValue()) == 1)
+      {
+         myModel.addCardToPile(pile, playCard);
+         myModel.getHumanHand().playCard(index);
+         deckEmpty = myModel.drawHumanCard();
+         return true;
+      }
+      return false;
+   }
+   
    /* required for ActionListner, this method is called
     * when registered actions (buttons etc) are interacted with.
     * This method is obviously officially public because of how
@@ -79,6 +131,7 @@ public class TimedCardsController implements ActionListener
     */
    public void actionPerformed(ActionEvent e)
    {
+      boolean goodMove = false;
       
       if (e.getActionCommand() == "Start")
       {
@@ -88,9 +141,29 @@ public class TimedCardsController implements ActionListener
       {
          myTimer.stopTimer();
       }
+      else if (e.getActionCommand() == "No Play")
+      {
+         processNoPlay();
+      }  
+      else if (e.getSource() == myViewer.leftButton)
+      {
+         goodMove = processUserPlay(0);
+      }
+      else if(e.getSource() == myViewer.rightButton)
+      {
+         goodMove = processUserPlay(1);
+      }
+      // finish or default action.
+      if (! gameEnd())
+      {
+         updateHands();
+         updatePlayArea();
+         computerMove();
+      }
       else
       {
-         System.out.println(e.getSource());
+         processGameEnd();
       }
+      
    }
 }
