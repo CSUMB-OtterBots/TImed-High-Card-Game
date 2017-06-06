@@ -40,16 +40,14 @@ public class TimedCardsController implements ActionListener
       // shuffle and deal into the hands.
       highCardGame.deal();
       
-      // add timer
-      myViewer.addStartStopButtons(this);
+      // add default buttons
+      myViewer.addControlButtons(this);
       
       // add initial cards to the middle
       updatePlayArea();
       
       // perform initial update
-      updateHands();
-     
-      
+      updateHands();  
    }
    
    void updateTimer()

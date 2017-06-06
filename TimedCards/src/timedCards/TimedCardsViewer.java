@@ -28,6 +28,7 @@ public class TimedCardsViewer implements ItemListener
    JButton start = new JButton("Start");
    JButton stop = new JButton("Stop");
    
+   JButton noPlay = new JButton("No Play");
    
    // Default constructor
    public TimedCardsViewer()
@@ -47,12 +48,15 @@ public class TimedCardsViewer implements ItemListener
    
    /****************** Public Methods *********************************/
    
-   void addStartStopButtons(ActionListener listener)
+   void addControlButtons(ActionListener listener)
    {
       start.addActionListener(listener);
       stop.addActionListener(listener);
+      noPlay.addActionListener(listener);
+      
       myCardTable.pnlTimer.add(start);
       myCardTable.pnlTimer.add(stop);
+      myCardTable.pnlControl.add(noPlay);
    }
    
    void updateTimer()
