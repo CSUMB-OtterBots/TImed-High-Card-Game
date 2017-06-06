@@ -14,6 +14,8 @@ public class Main
       TimedCardsViewer myView = new TimedCardsViewer();
       TimedCardsModel myModel = new TimedCardsModel();
       TimedCardsController myController = new TimedCardsController(myView, myModel);
+      UpTimer myTimer = new UpTimer(myController);
+      myTimer.start();
       myController.run();
    }
 

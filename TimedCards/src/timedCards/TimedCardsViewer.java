@@ -23,6 +23,13 @@ public class TimedCardsViewer
          new CardTable("CardTable", NUM_CARDS_PER_HAND, NUM_PLAYERS);
    static GUICard myGUICard = new GUICard();
    
+   JLabel timer;
+   private int counter = 0;
+   
+   JButton start = new JButton("Start");
+   JButton stop = new JButton("Stop");
+   
+   
    // Default constructor
    public TimedCardsViewer()
    {
@@ -31,12 +38,33 @@ public class TimedCardsViewer
       myCardTable.setSize(800, 600);
       myCardTable.setLocationRelativeTo(null);
       myCardTable.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      timer = new JLabel(String.format("%02d:%02d", counter / 60, counter % 60));
+      timer.setFont(new Font("Serif",Font.PLAIN, 60));
+      myCardTable.pnlTimer.add(timer);
       
       // show everything to the user
       myCardTable.setVisible(true);
    }
    
    /****************** Public Methods *********************************/
+   
+   void addStartStopButtons(ActionListener listener)
+   {
+      start.addActionListener(listener);
+      stop.addActionListener(listener);
+      myCardTable.pnlTimer.add(start);
+      myCardTable.pnlTimer.add(stop);
+   }
+   
+   void updateTimer()
+   {
+      System.out.println("test here");
+      System.exit(0);
+      counter++;
+      timer.setText(String.format("%02d:%02d", counter / 60, counter % 60));
+      myCardTable.pnlTimer.setVisible(false);
+      myCardTable.pnlTimer.setVisible(true);
+   }
    
    /*
     * This method updates the play area, and displays the argument cards

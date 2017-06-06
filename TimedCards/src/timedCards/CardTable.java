@@ -16,7 +16,8 @@ class CardTable extends JFrame
    private int numCardsPerHand;
    private int numPlayers;
 
-   public JPanel pnlComputerHand, pnlHumanHand, pnlPlayArea;
+   public JPanel pnlComputerHand, pnlHumanHand, 
+                 pnlPlayArea, pnlTimer;
 
    // creates the play area for the game
    CardTable(String title, int numCardsPerHand, int numPlayers)
@@ -38,6 +39,10 @@ class CardTable extends JFrame
       pnlHumanHand = new JPanel(new GridLayout(1, this.numCardsPerHand));
       setPanelVars(pnlHumanHand, "Human Hand");
       add(pnlHumanHand, BorderLayout.SOUTH);
+      
+      pnlTimer = new JPanel(new GridLayout(3, 1));
+      setPanelVars(pnlTimer, "Timer");
+      add(pnlTimer, BorderLayout.EAST);
    }
 
    // sets up the panel so that the text is within the border
