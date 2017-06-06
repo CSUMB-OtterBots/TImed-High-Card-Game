@@ -56,7 +56,8 @@ class Card
       if (goodCard)
       {
          errorFlag = false;
-      } else
+      } 
+      else
       {
          errorFlag = true;
       }

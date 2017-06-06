@@ -21,8 +21,7 @@ public class TimedCardsModel
    
    public static CardGameFramework myCardGame;
    
-   static private Hand pileA = new Hand();
-   static private Hand pileB = new Hand();
+   static private Hand[] piles = new Hand[2];
    
    static private int humanScore = 0;
    static private int compScore = 0;
@@ -49,69 +48,50 @@ public class TimedCardsModel
       compHand.sort();
       humanHand.sort();
       
-   }
-   
-   void addCardToPileA(Card card)
-   {
-      pileA.takeCard(card);
-   }
-   
-   void addCardToPilB(Card card)
-   {
-      pileB.takeCard(card);
-   }
-   
-   Card topCardInPileA()
-   {
-      int index = pileA.getNumCards();
-      return pileA.inspectCard(index);
-   }
-   
-   Card topCardinPileB()
-   {
-      int index = pileB.getNumCards();
-      return pileB.inspectCard(index);
-   }
-   
-   /*
-    * This method is used to add a card to the used card "hand"
-    */
-   void addUsedCard(Card card)
-   {
+      //set up piles, and put a card in each
+      piles[0] = new Hand();
+      piles[0].takeCard(myCardGame.getCardFromDeck());
+      piles[1] = new Hand();
+      piles[1].takeCard(myCardGame.getCardFromDeck());
       
    }
    
-   /*
-    * This method is used to set the last computerCard
-    */
-   void setLastCompCard(Card card)
+   boolean addCardToPile(int index, Card card)
    {
-      
+      if (index == 0 || index == 1)
+      {
+         piles[index].takeCard(card);
+         return true;
+      }
+      return false;
    }
    
-   /*
-    * This method is used to set the last humanCard
-    */
-   void setLastHumanCard(Card card)
+   Card topCardInPile(int index)
    {
-      
+      if (index ==0 || index == 1 )
+      {
+         int numCards = piles[index].getNumCards();
+         return piles[index].inspectCard(numCards - 1);
+      }
+      else
+      {
+         return new Card('Z', Card.Suit.spades); // invalid card
+      }
    }
    
-   /*
-    * This method is used to get the last computerCard
-    */
-   Card getLastCompCard()
+   // draw a new card for the human hand
+   boolean drawHumanCard()
    {
-      return new Card(); // just to allow compile
+      return myCardGame.takeCard(1);
    }
    
-   /*
-    * This method is used to get the last human card
-    */
-   Card getLastHumanCard()
+   // draw a new card for the computer hand
+   boolean drawCompCard()
    {
-      return new Card(); // just to allow compile
+      return myCardGame.takeCard(0);
    }
+   
+   
    
    /*
     * this method allows access to the computer hand

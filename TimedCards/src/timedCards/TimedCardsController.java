@@ -43,6 +43,9 @@ public class TimedCardsController implements ActionListener
       // add timer
       myViewer.addStartStopButtons(this);
       
+      // add initial cards to the middle
+      updatePlayArea();
+      
       // perform initial update
       updateHands();
      
@@ -59,6 +62,11 @@ public class TimedCardsController implements ActionListener
       myViewer.updateCompHand(myModel.getCompHand()); // update comp hand
       myViewer.updateHumanHand(myModel.getHumanHand(), this); // update human hand
       myViewer.refreshScreen();  // refresh the screen
+   }
+   
+   void updatePlayArea()
+   {
+      
    }
    
    /* required for ActionListner, this method is called
