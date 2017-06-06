@@ -98,7 +98,7 @@ public class TimedCardsViewer
     *   appropriate type of information to display.
     *   Probably buttonsFromHand(Hand hand)
     */
-   void updateHumanHand(Hand hand)
+   void updateHumanHand(Hand hand, ActionListener listner)
    {
       Card nextCard;
 
@@ -129,7 +129,7 @@ public class TimedCardsViewer
          if (humanButtons[i] != null)
          {
             myCardTable.pnlHumanHand.add(humanButtons[i]);
-            //humanButtons[i].addActionListener(new phase3());
+            humanButtons[i].addActionListener(listner);
          }
       }
    }

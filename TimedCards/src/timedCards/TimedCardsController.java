@@ -42,7 +42,7 @@ public class TimedCardsController implements ActionListener
    private void updateHands()
    {
       myViewer.updateCompHand(myModel.getCompHand()); // update comp hand
-      myViewer.updateHumanHand(myModel.getHumanHand()); // update human hand
+      myViewer.updateHumanHand(myModel.getHumanHand(), this); // update human hand
       myViewer.refreshScreen();  // refresh the screen
    }
    
@@ -54,5 +54,6 @@ public class TimedCardsController implements ActionListener
     */
    public void actionPerformed(ActionEvent e)
    {
+      System.out.println("Test");
    }
 }
