@@ -85,6 +85,11 @@ class Card
       } while (numSwaps != 0); // Once there are no swaps in for loop the array
                                // is sorted
    }
+   
+   public int getRank()
+   {
+      return rank(this.getValue());
+   }
 
    // helper method for arraySort
    public static int rank(char value)

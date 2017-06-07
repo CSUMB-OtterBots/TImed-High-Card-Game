@@ -90,6 +90,8 @@ public class TimedCardsViewer implements ItemListener
       // put on table
       myCardTable.pnlPlayArea.add(leftButton);
       myCardTable.pnlPlayArea.add(rightButton);
+      myCardTable.pnlPlayArea.setVisible(false);
+      myCardTable.pnlPlayArea.setVisible(true);
       
    }
    
@@ -135,8 +137,8 @@ public class TimedCardsViewer implements ItemListener
    // method resets the screen
    void refreshScreen()
    {
-      myCardTable.setVisible(false);
-      myCardTable.setVisible(true);
+      myCardTable.pnlPlayArea.setVisible(false);
+      myCardTable.pnlPlayArea.setVisible(true);
    }
    
 

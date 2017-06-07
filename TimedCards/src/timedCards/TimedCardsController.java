@@ -85,7 +85,7 @@ public class TimedCardsController implements ActionListener
    
    boolean gameEnd()
    {
-      return deckEmpty;
+      return !deckEmpty;
    }
    
    void processNoPlay()
@@ -113,9 +113,11 @@ public class TimedCardsController implements ActionListener
       // now find the card that was played
       playCard = myModel.getHumanHand().inspectCard(index);
       // check if it was ok
-      if ( Math.abs(playCard.getValue() - pileCard.getValue()) == 1)
+      System.out.println("playcard value " + playCard.getRank());
+      System.out.println("pile card value " + pileCard.getRank());
+      if ( Math.abs(playCard.getRank() - pileCard.getRank()) == 1)
       {
-         myModel.addCardToPile(pile, playCard);
+         System.out.println(myModel.addCardToPile(pile, playCard));
          myModel.getHumanHand().playCard(index);
          deckEmpty = myModel.drawHumanCard();
          return true;
