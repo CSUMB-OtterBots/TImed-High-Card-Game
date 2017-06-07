@@ -32,8 +32,7 @@ public class Assig6
       // get MVC and Timer set up and configured
       TimedCardsViewer myView = new TimedCardsViewer();
       TimedCardsModel myModel = new TimedCardsModel();
-      TimedCardsController myController = new TimedCardsController(myView,
-            myModel);
+      TimedCardsController myController = new TimedCardsController(myView, myModel);
       UpTimer myTimer = new UpTimer(myController);
       myController.setTimer(myTimer);
       // start the show!
@@ -53,8 +52,7 @@ class TimedCardsViewer implements ItemListener
    static JLabel[] playLabelText = new JLabel[NUM_PLAYERS];
 
    JToggleButton[] humanButtons = new JToggleButton[NUM_CARDS_PER_HAND];
-   static CardTable myCardTable = new CardTable("CardTable", NUM_CARDS_PER_HAND,
-         NUM_PLAYERS);
+   static CardTable myCardTable = new CardTable("CardTable", NUM_CARDS_PER_HAND, NUM_PLAYERS);
    static GUICard myGUICard = new GUICard();
 
    JLabel timer;
@@ -75,8 +73,7 @@ class TimedCardsViewer implements ItemListener
       myCardTable.setSize(800, 600);
       myCardTable.setLocationRelativeTo(null);
       myCardTable.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      timer = new JLabel(
-            String.format("%02d:%02d", counter / 60, counter % 60));
+      timer = new JLabel(String.format("%02d:%02d", counter / 60, counter % 60));
       timer.setFont(new Font("Serif", Font.PLAIN, 60));
       myCardTable.pnlTimer.add(timer);
 
@@ -93,10 +90,12 @@ class TimedCardsViewer implements ItemListener
       if (compScore < humanScore) // low is good
       {
          winner = "Computer Wins";
-      } else if (humanScore < compScore)
+      }
+      else if (humanScore < compScore)
       {
          winner = "Human Wins";
-      } else
+      }
+      else
       {
          winner = "Cat's Game!";
       }
@@ -310,9 +309,8 @@ class TimedCardsModel
       Card[] unusedCardsPerPack = null;
 
       // instantiate game
-      myCardGame = new CardGameFramework(numPacksPerDeck, numJokersPerPack,
-            numUnusedCardsPerPack, unusedCardsPerPack, NUM_PLAYERS,
-            NUM_CARDS_PER_HAND);
+      myCardGame = new CardGameFramework(numPacksPerDeck, numJokersPerPack, numUnusedCardsPerPack, unusedCardsPerPack,
+            NUM_PLAYERS, NUM_CARDS_PER_HAND);
       // shuffle and deal into the hands.
       myCardGame.deal();
 
@@ -356,7 +354,8 @@ class TimedCardsModel
       {
          int numCards = piles[index].getNumCards();
          return piles[index].inspectCard(numCards - 1);
-      } else
+      }
+      else
       {
          return new Card('Z', Card.Suit.spades); // invalid card
       }
@@ -428,9 +427,8 @@ class TimedCardsController implements ActionListener
       Card[] unusedCardsPerPack = null;
 
       // instantiate game
-      CardGameFramework timedCardGame = new CardGameFramework(numPacksPerDeck,
-            numJokersPerPack, numUnusedCardsPerPack, unusedCardsPerPack,
-            NUM_PLAYERS, NUM_CARDS_PER_HAND);
+      CardGameFramework timedCardGame = new CardGameFramework(numPacksPerDeck, numJokersPerPack, numUnusedCardsPerPack,
+            unusedCardsPerPack, NUM_PLAYERS, NUM_CARDS_PER_HAND);
       // shuffle and deal into the hands.
       timedCardGame.deal();
 
@@ -499,7 +497,8 @@ class TimedCardsController implements ActionListener
             pile = 0;
             index = i;
             break;
-         } else if (Math.abs(curCardValue - rightCard) == 1)
+         }
+         else if (Math.abs(curCardValue - rightCard) == 1)
          {
             pile = 1;
             index = i;
@@ -578,22 +577,27 @@ class TimedCardsController implements ActionListener
       if (e.getActionCommand() == "Start")
       {
          myTimer.startTimer();
-      } else if (e.getActionCommand() == "Stop")
+      }
+      else if (e.getActionCommand() == "Stop")
       {
          myTimer.stopTimer();
-      } else if (e.getActionCommand() == "No Play")
+      }
+      else if (e.getActionCommand() == "No Play")
       {
          processNoPlay();
-      } else if (e.getSource() == myViewer.leftButton)
+      }
+      else if (e.getSource() == myViewer.leftButton)
       {
          goodMove = processUserPlay(0);
-      } else if (e.getSource() == myViewer.rightButton)
+      }
+      else if (e.getSource() == myViewer.rightButton)
       {
          goodMove = processUserPlay(1);
          if (goodMove)
          {
             computerStuck = false;
-         } else
+         }
+         else
          {
             return; // no penalty for bad move
          }
@@ -610,7 +614,8 @@ class TimedCardsController implements ActionListener
          updateHands();
          myViewer.refreshScreen();
          return;
-      } else
+      }
+      else
       {
          System.out.print("Game Ended");
          processGameEnd();
@@ -674,7 +679,8 @@ class UpTimer extends Thread
       try
       {
          Thread.sleep(milliseconds);
-      } catch (InterruptedException e)
+      }
+      catch (InterruptedException e)
       {
          // catch and release
       }
@@ -800,7 +806,8 @@ class Hand
       {
          // Creates illegal card
          return new Card('Z', Card.Suit.spades);
-      } else
+      }
+      else
       {
          return myCards[k];
       }
@@ -824,7 +831,8 @@ class GUICard
       if (k >= 0 && k <= 13)
       {
          returnValue = cardValues[k];
-      } else
+      }
+      else
       {
          System.out.println("returning default value A");
          return cardValues[0];// returns default value "A".
@@ -841,7 +849,8 @@ class GUICard
       if (j >= 0 && j <= 3)
       {
          returnSuit = cardSuits[j];
-      } else
+      }
+      else
       {
          System.out.println("returning default suit C");
          return cardSuits[0]; // returns default value "C"
@@ -861,9 +870,7 @@ class GUICard
          {
             for (int j = 0; j < 14; j++)
             {
-               iconCards[j][i] = new ImageIcon(
-                     "images/" + turnIntIntoCardValue(j)
-                           + turnIntIntoCardSuit(i) + fileExt);
+               iconCards[j][i] = new ImageIcon("images/" + turnIntIntoCardValue(j) + turnIntIntoCardSuit(i) + fileExt);
             }
          }
          iconBack = new ImageIcon("images/BK.gif"); // Back of card (Last)
@@ -1001,8 +1008,7 @@ class Deck
       // check deck for another copy of card
       for (int i = 0; i < cards.length; i++)
       {
-         if (cards[i].getSuit() == card.getSuit()
-               && cards[i].getValue() == card.getValue())
+         if (cards[i].getSuit() == card.getSuit() && cards[i].getValue() == card.getValue())
          {
             copies++;
          }
@@ -1058,8 +1064,7 @@ class Deck
       int index = -1;
       for (int i = 0; i < cards.length; i++)
       {
-         if (cards[i].getSuit() == card.getSuit()
-               && cards[i].getValue() == card.getValue())
+         if (cards[i].getSuit() == card.getSuit() && cards[i].getValue() == card.getValue())
          {
             index = i;
             break;
@@ -1086,7 +1091,8 @@ class Deck
       {
          retCard = cards[topCard];
          topCard--;
-      } else
+      }
+      else
       {
          retCard = new Card('z', Card.Suit.clubs); // 'z' forces a card with
          // errorFlag set.
@@ -1106,7 +1112,8 @@ class Deck
          badCard.set('z', Card.Suit.clubs); // this will receive an error flag
          // because of "z"
          return badCard;
-      } else
+      }
+      else
       {
          return cards[index];
       }
@@ -1127,8 +1134,7 @@ class Deck
          {
             for (int j = 0; j < Card.values.length; j++)
             {
-               masterPack[index] = new Card(Card.values[j],
-                     Card.Suit.values()[i]);
+               masterPack[index] = new Card(Card.values[j], Card.Suit.values()[i]);
                index++;
             }
          }
@@ -1146,8 +1152,7 @@ class CardTable extends JFrame
 
    private int numCardsPerHand;
 
-   public JPanel pnlComputerHand, pnlHumanHand, pnlPlayArea, pnlTimer,
-         pnlControl;
+   public JPanel pnlComputerHand, pnlHumanHand, pnlPlayArea, pnlTimer, pnlControl;
 
    // creates the play area for the game
    CardTable(String title, int numCardsPerHand, int numPlayers)
@@ -1212,9 +1217,8 @@ class CardGameFramework
                                       // in the game. e.g. pinochle does not
                                       // use cards 2-8 of any suit
 
-   public CardGameFramework(int numPacks, int numJokersPerPack,
-         int numUnusedCardsPerPack, Card[] unusedCardsPerPack, int numPlayers,
-         int numCardsPerHand)
+   public CardGameFramework(int numPacks, int numJokersPerPack, int numUnusedCardsPerPack, Card[] unusedCardsPerPack,
+         int numPlayers, int numCardsPerHand)
    {
       int k;
 
@@ -1228,8 +1232,7 @@ class CardGameFramework
       if (numPlayers < 1 || numPlayers > MAX_PLAYERS)
          numPlayers = 4;
       // one of many ways to assure at least one full deal to all players
-      if (numCardsPerHand < 1 || numCardsPerHand > numPacks
-            * (52 - numUnusedCardsPerPack) / numPlayers)
+      if (numCardsPerHand < 1 || numCardsPerHand > numPacks * (52 - numUnusedCardsPerPack) / numPlayers)
          numCardsPerHand = numPacks * (52 - numUnusedCardsPerPack) / numPlayers;
 
       // allocate
@@ -1346,8 +1349,7 @@ class CardGameFramework
    Card playCard(int playerIndex, int cardIndex)
    {
       // returns bad card if either argument is bad
-      if (playerIndex < 0 || playerIndex > numPlayers - 1 || cardIndex < 0
-            || cardIndex > numCardsPerHand - 1)
+      if (playerIndex < 0 || playerIndex > numPlayers - 1 || cardIndex < 0 || cardIndex > numCardsPerHand - 1)
       {
          // Creates a card that does not work
          return new Card('M', Card.Suit.spades);
@@ -1430,7 +1432,8 @@ class Card
       if (goodCard)
       {
          errorFlag = false;
-      } else
+      }
+      else
       {
          errorFlag = true;
       }
@@ -1507,7 +1510,8 @@ class Card
          value = newValue;
          suit = newSuit;
          errorFlag = false;
-      } else
+      }
+      else
       {
          errorFlag = true;
          suit = newSuit;
