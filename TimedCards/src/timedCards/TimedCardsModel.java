@@ -84,11 +84,6 @@ public class TimedCardsModel
       }
    }
    
-   // draw a new card for the human hand
-   boolean drawHumanCard()
-   {
-      return myCardGame.takeCard(1);
-   }
    
    // draw a new card for the computer hand
    boolean drawCompCard()
@@ -96,7 +91,11 @@ public class TimedCardsModel
       return myCardGame.takeCard(0);
    }
    
-   
+   // draw a new card for the human hand
+   boolean drawHumanCard()
+   {
+      return myCardGame.takeCard(1);
+   }
    
    /*
     * this method allows access to the computer hand

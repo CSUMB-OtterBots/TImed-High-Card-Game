@@ -202,17 +202,20 @@ public class TimedCardsController implements ActionListener
          {
             computerStuck = false;
          }
+         else
+         {
+            return; // no penalty for bad move
+         }
       }
       // finish or default action.
       if (!deckEmpty)
       {
          computerMove();
-         updatePlayArea();
       }
-      myViewer.refreshScreen();
       // computer moved, so game could have ended
       if(!deckEmpty)
       {
+         updatePlayArea();
          updateHands();
          myViewer.refreshScreen();
          return;
