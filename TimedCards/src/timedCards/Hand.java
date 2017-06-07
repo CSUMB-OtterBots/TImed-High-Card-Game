@@ -47,14 +47,18 @@ class Hand
     */
    public boolean takeCard(Card card)
    {
+      boolean gotCard = false;
       if (numCards != MAX_CARDS)
       {
          Card newCard = new Card(card);
-         myCards[numCards] = newCard;
-         numCards++;
-         return true;
+         if (!newCard.getErrorFlag())
+         {
+            myCards[numCards] = newCard;
+            numCards++;
+            gotCard = true;
+         }
       }
-      return false;
+      return gotCard;
    }
 
    /*

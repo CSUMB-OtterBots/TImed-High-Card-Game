@@ -50,6 +50,33 @@ public class TimedCardsViewer implements ItemListener
    
    /****************** Public Methods *********************************/
    
+   void displayVictory(int compScore, int humanScore)
+   {
+      String winner;
+      if (compScore < humanScore) // low is good
+      {
+         winner = "Computer Wins";
+      }
+      else if (humanScore < compScore)
+      {
+         winner = "Human Wins";
+      }
+      else
+      {
+         winner = "Cat's Game!";
+      }
+      myCardTable.pnlPlayArea.removeAll();
+      myCardTable.pnlComputerHand.removeAll();
+      myCardTable.pnlHumanHand.removeAll();
+      JLabel compFinal = new JLabel("Computer Score: " + compScore);
+      JLabel humanFinal = new JLabel("Human Score: " + humanScore);
+      JLabel victor = new JLabel(winner);
+      myCardTable.pnlPlayArea.add(compFinal);
+      myCardTable.pnlPlayArea.add(humanFinal);
+      myCardTable.pnlPlayArea.add(victor);
+      myCardTable.pnlPlayArea.setVisible(false);
+      myCardTable.pnlPlayArea.setVisible(true);
+   }
    void addControlButtons(ActionListener listener)
    {
       start.addActionListener(listener);

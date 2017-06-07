@@ -129,7 +129,7 @@ public class TimedCardsController implements ActionListener
    
    void processGameEnd()
    {
-      
+      myViewer.displayVictory(myModel.compScore, myModel.humanScore);
    }
    
    void processNoPlay()

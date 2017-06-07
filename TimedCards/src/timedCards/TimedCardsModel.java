@@ -16,8 +16,8 @@ public class TimedCardsModel
    static int NUM_CARDS_PER_HAND = TimedCardsController.NUM_CARDS_PER_HAND;
    static int NUM_PLAYERS = TimedCardsController.NUM_PLAYERS;
    
-   Hand compHand; // computer's hand
-   Hand humanHand; // human's hand
+   private Hand compHand; // computer's hand
+   private Hand humanHand; // human's hand
    
    public static CardGameFramework myCardGame;
    
