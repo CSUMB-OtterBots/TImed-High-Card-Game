@@ -1,0 +1,21 @@
+	•	5% of your grade will be based on your completion of an evaluation of your peers for this assignment and a self evaluation. Put your responses in the box below.
+
+
+
+	•	Communication -- Them with you?  You with them?
+
+
+
+	•	Who decided what each person would do?   Did they do their part?  Did you do your part?
+
+David took charge and developed a significant portion of the code. David largely lead this project. Nick performed all of the administrative tasks and submitted chunks of code in each phase and worked out several kinks. Chris was the sole developer of the timer multithreading. Chris additionally cleaned up the code for review. Nathan and Haley contributed comments and code review. 
+
+	•	How much effort did YOU put into the assignment?
+
+
+
+	•	How hard was this assignment?
+
+
+
+	•	In your own words, describe how your code solved the assignment.  This should not be the same as any other team members explanation.
