@@ -13,7 +13,9 @@ public class TimedCardsController implements ActionListener
    UpTimer myTimer;
    
    boolean deckEmpty = false;
-
+   boolean computerStuck = false;
+   boolean humanStuck = false;
+         
    public TimedCardsController(TimedCardsViewer view,
              TimedCardsModel model)
    {
@@ -36,11 +38,11 @@ public class TimedCardsController implements ActionListener
       Card[] unusedCardsPerPack = null;
 
       // instantiate game
-      CardGameFramework highCardGame = 
+      CardGameFramework timedCardGame = 
             new CardGameFramework(numPacksPerDeck, numJokersPerPack, numUnusedCardsPerPack,
                                   unusedCardsPerPack, NUM_PLAYERS, NUM_CARDS_PER_HAND);
       // shuffle and deal into the hands.
-      highCardGame.deal();
+      timedCardGame.deal();
       
       // add default buttons
       myViewer.addControlButtons(this);
@@ -60,7 +62,7 @@ public class TimedCardsController implements ActionListener
    private void updateHands()
    {
       myViewer.updateCompHand(myModel.getCompHand()); // update comp hand
-      myViewer.updateHumanHand(myModel.getHumanHand(), this); // update human hand
+      myViewer.updateHumanHand(myModel.getHumanHand()); // update human hand
       myViewer.refreshScreen();  // refresh the screen
    }
    
@@ -73,9 +75,56 @@ public class TimedCardsController implements ActionListener
       
    }
    
+   boolean unStickPlayers()
+   {
+      humanStuck = false;
+      computerStuck = false;
+      return !myModel.dealToPiles();
+   }
+   
+   void checkStuck()
+   {
+      if (computerStuck && humanStuck)
+      {
+         deckEmpty = unStickPlayers();
+      }
+   }
+   
    void computerMove()
    {
+      int pile = -1;
+      int index = -1;
+      int leftCard  = myModel.getTopCardInPile(0).getRank();
+      int rightCard = myModel.getTopCardInPile(1).getRank();
       
+      for (int i = 0; i < myModel.getCompHand().getNumCards(); i++)
+      {
+         int curCardValue = myModel.getCompHand().inspectCard(i).getRank();
+         if ( Math.abs(curCardValue - leftCard) == 1)
+         {
+            pile = 0;
+            index = i;
+            break;
+         }
+         else if ( Math.abs(curCardValue - rightCard) == 1)
+         {
+            pile = 1;
+            index = i;
+            break;
+         }
+      }
+      if (pile == -1) // no play
+      {
+         computerStuck = true;
+         myModel.compScore ++;
+         checkStuck();
+         return;
+      }
+      // if we get to here, we found a play
+      humanStuck = false;
+      Card playCard = myModel.getCompHand().playCard(index);
+      myModel.addCardToPile(pile, playCard);
+      deckEmpty = !myModel.drawCompCard();
    }
    
    void processGameEnd()
@@ -83,14 +132,11 @@ public class TimedCardsController implements ActionListener
       
    }
    
-   boolean gameEnd()
-   {
-      return !deckEmpty;
-   }
-   
    void processNoPlay()
    {
-      
+      humanStuck = true;
+      myModel.humanScore ++;
+      checkStuck();
    }
    
    boolean processUserPlay(int pile)
@@ -113,13 +159,11 @@ public class TimedCardsController implements ActionListener
       // now find the card that was played
       playCard = myModel.getHumanHand().inspectCard(index);
       // check if it was ok
-      System.out.println("playcard value " + playCard.getRank());
-      System.out.println("pile card value " + pileCard.getRank());
       if ( Math.abs(playCard.getRank() - pileCard.getRank()) == 1)
       {
-         System.out.println(myModel.addCardToPile(pile, playCard));
+         myModel.addCardToPile(pile, playCard);
          myModel.getHumanHand().playCard(index);
-         deckEmpty = myModel.drawHumanCard();
+         deckEmpty = !myModel.drawHumanCard();
          return true;
       }
       return false;
@@ -154,17 +198,28 @@ public class TimedCardsController implements ActionListener
       else if(e.getSource() == myViewer.rightButton)
       {
          goodMove = processUserPlay(1);
+         if (goodMove)
+         {
+            computerStuck = false;
+         }
       }
       // finish or default action.
-      if (! gameEnd())
+      if (!deckEmpty)
+      {
+         computerMove();
+         updatePlayArea();
+      }
+      myViewer.refreshScreen();
+      // computer moved, so game could have ended
+      if(!deckEmpty)
       {
          updateHands();
-         updatePlayArea();
-         computerMove();
          myViewer.refreshScreen();
+         return;
       }
       else
       {
+         System.out.print("Game Ended");
          processGameEnd();
       }
       

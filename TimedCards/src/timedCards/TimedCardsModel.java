@@ -16,15 +16,15 @@ public class TimedCardsModel
    static int NUM_CARDS_PER_HAND = TimedCardsController.NUM_CARDS_PER_HAND;
    static int NUM_PLAYERS = TimedCardsController.NUM_PLAYERS;
    
-   static private Hand compHand; // computer's hand
-   static private Hand humanHand; // human's hand
+   Hand compHand; // computer's hand
+   Hand humanHand; // human's hand
    
    public static CardGameFramework myCardGame;
    
    Hand[] piles = new Hand[2];
    
-   static private int humanScore = 0;
-   static private int compScore = 0;
+   int humanScore = 0;
+   int compScore = 0;
    
    // default constructor
    public TimedCardsModel()
@@ -50,10 +50,15 @@ public class TimedCardsModel
       
       //set up piles, and put a card in each
       piles[0] = new Hand();
+      piles[1] = new Hand();     
+      dealToPiles();
+   }
+   
+   boolean dealToPiles()
+   {
       piles[0].takeCard(myCardGame.getCardFromDeck());
-      piles[1] = new Hand();
       piles[1].takeCard(myCardGame.getCardFromDeck());
-      
+      return (! getTopCardInPile(1).getErrorFlag() ); // make sure we didn't run out
    }
    
    boolean addCardToPile(int index, Card card)

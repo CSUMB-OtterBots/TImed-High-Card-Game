@@ -112,6 +112,8 @@ public class TimedCardsViewer implements ItemListener
       {
          myCardTable.pnlComputerHand.add(computerLabels[i]);
       }
+      myCardTable.pnlComputerHand.setVisible(false);
+      myCardTable.pnlComputerHand.setVisible(true);
    }
    
    /*
@@ -121,7 +123,7 @@ public class TimedCardsViewer implements ItemListener
     *   appropriate type of information to display.
     *   Probably buttonsFromHand(Hand hand)
     */
-   void updateHumanHand(Hand hand, ActionListener listner)
+   void updateHumanHand(Hand hand)
    {
       myCardTable.pnlHumanHand.removeAll(); //  clear old buttons
       humanButtons = null;
@@ -131,6 +133,8 @@ public class TimedCardsViewer implements ItemListener
          myCardTable.pnlHumanHand.add(humanButtons[i]);
          humanButtons[i].addItemListener(this);
       }
+      myCardTable.pnlHumanHand.setVisible(false);
+      myCardTable.pnlHumanHand.setVisible(true);
       
    }
    
